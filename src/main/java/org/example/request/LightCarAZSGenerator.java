@@ -8,7 +8,7 @@ public class LightCarAZSGenerator extends Generator {
 
 
     public LightCarAZSGenerator(int frequencyBound, int fuelBound, int fuelOffset) {
-        super(ClientType.light,frequencyBound, fuelBound, fuelOffset);
+        super(ClientType.light, frequencyBound, fuelBound, fuelOffset);
 
         availableFuelTypes = new ArrayList<>();
         availableFuelTypes.add(FuelType.DT);

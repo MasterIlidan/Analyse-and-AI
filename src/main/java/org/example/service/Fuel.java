@@ -10,11 +10,8 @@ public class Fuel {
     }
 
     /**
-     *
-     * @param countOfFuel
-     * количество топлива, которое хочет заправить клиент
-     * @return
-     * true - заправка успешна
+     * @param countOfFuel количество топлива, которое хочет заправить клиент
+     * @return true - заправка успешна
      * false - недостаточно топлива на заправке, клиенту отказано
      */
     public boolean refillClientCar(int countOfFuel) {
@@ -26,9 +23,11 @@ public class Fuel {
             return false;
         }
     }
+
     public int getValue() {
         return value;
     }
+
     public void setValue(int value) {
         this.value = value;
     }

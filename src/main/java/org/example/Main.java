@@ -8,7 +8,6 @@ import org.example.service.FuelType;
 import org.example.vault.Vault;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 public class Main {
     static ArrayList<LightCarAZSGenerator> lightCarAZSClients = new ArrayList<>();
@@ -111,55 +110,32 @@ public class Main {
 
         double income = 0;
         for (AZS azs : fuelAZSStations) {
-            System.out.printf("%s fuel remaining 92: %d, 95: %d, 98: %d, DT: %d\n",
-                    azs.getName(),
-                    azs.getCurrentFuel(FuelType.F92),
-                    azs.getCurrentFuel(FuelType.F95),
-                    azs.getCurrentFuel(FuelType.F98),
-                    azs.getCurrentFuel(FuelType.DT));
+            System.out.printf("%s fuel remaining 92: %d, 95: %d, 98: %d, DT: %d\n", azs.getName(), azs.getCurrentFuel(FuelType.F92), azs.getCurrentFuel(FuelType.F95), azs.getCurrentFuel(FuelType.F98), azs.getCurrentFuel(FuelType.DT));
             income += azs.getIncome();
         }
         for (AAZS azs : fuelAAZSStations) {
-            System.out.printf("%s fuel remaining 92: %d, 95: %d\n",
-                    azs.getName(),
-                    azs.getCurrentFuel(FuelType.F92),
-                    azs.getCurrentFuel(FuelType.F95));
+            System.out.printf("%s fuel remaining 92: %d, 95: %d\n", azs.getName(), azs.getCurrentFuel(FuelType.F92), azs.getCurrentFuel(FuelType.F95));
             income += azs.getIncome();
         }
         System.out.printf("""
-                        Fuel remaining in main vaults:
-                        \tAZS:
-                        92: %d
-                        95: %d
-                        98: %d
-                        DT: %d
-                        \tAAZS:
-                        92: %d
-                        95: %d
-                        """, Vault.getCurrentFuel(FuelStationType.AZS, FuelType.F92),
-                Vault.getCurrentFuel(FuelStationType.AZS, FuelType.F95),
-                Vault.getCurrentFuel(FuelStationType.AZS, FuelType.F98),
-                Vault.getCurrentFuel(FuelStationType.AZS, FuelType.DT),
-                Vault.getCurrentFuel(FuelStationType.AAZS, FuelType.F92),
-                Vault.getCurrentFuel(FuelStationType.AAZS, FuelType.F95));
+                Fuel remaining in main vaults:
+                \tAZS:
+                92: %d
+                95: %d
+                98: %d
+                DT: %d
+                \tAAZS:
+                92: %d
+                95: %d
+                """, Vault.getCurrentFuel(FuelStationType.AZS, FuelType.F92), Vault.getCurrentFuel(FuelStationType.AZS, FuelType.F95), Vault.getCurrentFuel(FuelStationType.AZS, FuelType.F98), Vault.getCurrentFuel(FuelStationType.AZS, FuelType.DT), Vault.getCurrentFuel(FuelStationType.AAZS, FuelType.F92), Vault.getCurrentFuel(FuelStationType.AAZS, FuelType.F95));
 
         //----------SERVICE----------
 
         for (AZS azs : fuelAZSStations) {
-            System.out.printf("%s clients %d, serviced %d, %2f%s\n",
-                    azs.getName(),
-                    azs.getClients(),
-                    azs.getServicedClients(),
-                    ((double) azs.getServicedClients() / azs.getClients()) * 100,
-                    "%");
+            System.out.printf("%s clients %d, serviced %d, %2f%s\n", azs.getName(), azs.getClients(), azs.getServicedClients(), ((double) azs.getServicedClients() / azs.getClients()) * 100, "%");
         }
         for (AAZS azs : fuelAAZSStations) {
-            System.out.printf("%s clients %d, serviced %d, %2f%s\n",
-                    azs.getName(),
-                    azs.getClients(),
-                    azs.getServicedClients(),
-                    ((double) azs.getServicedClients() / azs.getClients()) * 100,
-                    "%");
+            System.out.printf("%s clients %d, serviced %d, %2f%s\n", azs.getName(), azs.getClients(), azs.getServicedClients(), ((double) azs.getServicedClients() / azs.getClients()) * 100, "%");
         }
 
         System.out.printf("Income : %2f", income);

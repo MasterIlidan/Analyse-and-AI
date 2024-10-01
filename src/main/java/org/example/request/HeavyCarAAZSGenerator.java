@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class HeavyCarAAZSGenerator extends Generator {
     public HeavyCarAAZSGenerator(int frequencyBound, int fuelBound, int fuelOffset) {
-        super(ClientType.heavy,frequencyBound, fuelBound, fuelOffset);
+        super(ClientType.heavy, frequencyBound, fuelBound, fuelOffset);
 
         availableFuelTypes = new ArrayList<>();
         availableFuelTypes.add(FuelType.F92);

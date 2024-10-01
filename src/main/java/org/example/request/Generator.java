@@ -15,24 +15,27 @@ public abstract class Generator {
     int timeToNextClient = 0;
 
     ArrayList<FuelType> availableFuelTypes;
-    public Generator(ClientType clientType,int frequencyBound, int fuelBound, int fuelOffset) {
+
+    public Generator(ClientType clientType, int frequencyBound, int fuelBound, int fuelOffset) {
         this.clientType = clientType;
         this.frequencyBound = frequencyBound;
         this.fuelBound = fuelBound;
         this.fuelOffset = fuelOffset;
 
     }
+
     public Client makeNewClient() {
         if (timeToNextClient == 0) {
             makeNewRandomTimeToNextClient();
             FuelType fuelType = availableFuelTypes.get(rand.nextInt(availableFuelTypes.size()));
             int countOfFuel = rand.nextInt(fuelBound) + fuelOffset;
-            return new Client(clientType,fuelType, countOfFuel);
+            return new Client(clientType, fuelType, countOfFuel);
         } else {
             timeToNextClient--;
             return null;
         }
     }
+
     public void makeNewRandomTimeToNextClient() {
         timeToNextClient = rand.nextInt(frequencyBound);
     }

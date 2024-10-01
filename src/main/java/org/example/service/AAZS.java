@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class AAZS extends FuelStation {
     private static int counter = 1;
+
     public AAZS() {
         name = "AAZS " + counter++;
         fuelStationType = FuelStationType.AAZS;
@@ -23,6 +24,7 @@ public class AAZS extends FuelStation {
 
         return vault;
     }
+
     HashMap<FuelType, Double> initPrices() {
         HashMap<FuelType, Double> prices = new HashMap<>();
         prices.put(FuelType.F95, 48.2);

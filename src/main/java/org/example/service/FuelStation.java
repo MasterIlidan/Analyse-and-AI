@@ -5,7 +5,7 @@ import org.example.vault.Vault;
 
 import java.util.HashMap;
 
-public class FuelStation {
+public abstract class FuelStation {
     String name;
     FuelStationType fuelStationType;
     HashMap<FuelType, Fuel> vault;
@@ -28,7 +28,7 @@ public class FuelStation {
                 Fuel refillingFuel = vault.get(client.getFuelType());
                 int currentValue = refillingFuel.getValue();
                 System.out.printf("Low fuel in vault. Now %d, refilling...", currentValue);
-                int newValue = currentValue + Vault.refill(fuelStationType, refillingFuel.type,6000);
+                int newValue = currentValue + Vault.refill(fuelStationType, refillingFuel.type, 6000);
                 refillingFuel.setValue(newValue);
 
                 vault.put(refillingFuel.type, refillingFuel);
@@ -38,19 +38,24 @@ public class FuelStation {
         System.out.println("Current income " + income);
         return success;
     }
+
     public double getIncome() {
         return income;
     }
-    public int getCurrentFuel (FuelType fuelType) {
+
+    public int getCurrentFuel(FuelType fuelType) {
         return vault.get(fuelType).getValue();
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public int getClients(){
+
+    public int getClients() {
         return clients;
     }
-    public int getServicedClients(){
+
+    public int getServicedClients() {
         return servicedClients;
     }
 }
