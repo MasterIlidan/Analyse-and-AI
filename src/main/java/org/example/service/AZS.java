@@ -1,7 +1,5 @@
 package org.example.service;
 
-import org.example.request.Client;
-
 import java.util.HashMap;
 
 public class AZS extends FuelStation {

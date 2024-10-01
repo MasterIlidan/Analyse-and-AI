@@ -5,7 +5,7 @@ import org.example.service.FuelType;
 
 import java.util.HashMap;
 
-public abstract class Vault {
+public class Vault {
 
     public static HashMap<FuelStationType,HashMap<FuelType,Integer>> vaults;
     //private static HashMap<FuelType, Integer> vault;
@@ -41,7 +41,7 @@ public abstract class Vault {
         int returnValue;
 
         if (currentCapacity <= 0) {
-            System.out.printf("No fuel %s in main vault\n", fuelType);
+            System.out.printf("No fuel %s in main vault\n", fuelType.fuelType);
             return 0;
         }
 

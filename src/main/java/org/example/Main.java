@@ -3,6 +3,8 @@ package org.example;
 import org.example.request.*;
 import org.example.service.AAZS;
 import org.example.service.AZS;
+import org.example.service.FuelStationType;
+import org.example.service.FuelType;
 import org.example.vault.Vault;
 
 import java.util.ArrayList;
@@ -17,7 +19,6 @@ public class Main {
     static ArrayList<AAZS> fuelAAZSStations = new ArrayList<>();
 
     public static void main(String[] args) {
-        double income = 0;
         init();
         Vault.initVaults(42000, 24000);
 
@@ -27,23 +28,16 @@ public class Main {
             makeAAZSTick();
         }
 
-        for (AZS azs : fuelAZSStations) {
-            income += azs.getIncome();
-        }
-        for (AAZS azs : fuelAAZSStations) {
-            income += azs.getIncome();
-        }
-
-        System.out.printf("Income : %2f", income);
+        makeCounts();
     }
 
     private static void init() {
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 14; i++) {
             lightCarAZSClients.add(new LightCarAZSGenerator(6, 40, 10));
             heavyCarAZSClients.add(new HeavyCarAZSGenerator(13, 270, 30));
             fuelAZSStations.add(new AZS());
         }
-        for (int i = 0; i < 14; i++) {
+        for (int i = 0; i < 16; i++) {
             lightCarAAZSClients.add(new LightCarAAZSGenerator(6, 40, 10));
             heavyCarAAZSClients.add(new HeavyCarAAZSGenerator(13, 270, 30));
             fuelAAZSStations.add(new AAZS());
@@ -106,5 +100,66 @@ public class Main {
             }
 
         }
+    }
+
+    public static void makeCounts() {
+        System.out.println("----------RESULTS----------");
+
+        //----------FUEL REMAINING----------
+
+        double income = 0;
+        for (AZS azs : fuelAZSStations) {
+            System.out.printf("%s fuel remaining 92: %d, 95: %d, 98: %d, DT: %d\n",
+                    azs.getName(),
+                    azs.getCurrentFuel(FuelType.F92),
+                    azs.getCurrentFuel(FuelType.F95),
+                    azs.getCurrentFuel(FuelType.F98),
+                    azs.getCurrentFuel(FuelType.DT));
+            income += azs.getIncome();
+        }
+        for (AAZS azs : fuelAAZSStations) {
+            System.out.printf("%s fuel remaining 92: %d, 95: %d\n",
+                    azs.getName(),
+                    azs.getCurrentFuel(FuelType.F92),
+                    azs.getCurrentFuel(FuelType.F95));
+            income += azs.getIncome();
+        }
+        System.out.printf("""
+                        Fuel remaining in main vaults:
+                        \tAZS:
+                        92: %d
+                        95: %d
+                        98: %d
+                        DT: %d
+                        \tAAZS:
+                        92: %d
+                        95: %d
+                        """, Vault.getCurrentFuel(FuelStationType.AZS, FuelType.F92),
+                Vault.getCurrentFuel(FuelStationType.AZS, FuelType.F95),
+                Vault.getCurrentFuel(FuelStationType.AZS, FuelType.F98),
+                Vault.getCurrentFuel(FuelStationType.AZS, FuelType.DT),
+                Vault.getCurrentFuel(FuelStationType.AAZS, FuelType.F92),
+                Vault.getCurrentFuel(FuelStationType.AAZS, FuelType.F95));
+
+        //----------SERVICE----------
+
+        for (AZS azs : fuelAZSStations) {
+            System.out.printf("%s clients %d, serviced %d, %2f%s\n",
+                    azs.getName(),
+                    azs.getClients(),
+                    azs.getServicedClients(),
+                    ((double) azs.getServicedClients() / azs.getClients()) * 100,
+                    "%");
+        }
+        for (AAZS azs : fuelAAZSStations) {
+            System.out.printf("%s clients %d, serviced %d, %2f%s\n",
+                    azs.getName(),
+                    azs.getClients(),
+                    azs.getServicedClients(),
+                    ((double) azs.getServicedClients() / azs.getClients()) * 100,
+                    "%");
+        }
+
+        System.out.printf("Income : %2f", income);
     }
 }

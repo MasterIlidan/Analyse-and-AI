@@ -29,7 +29,7 @@ public class FuelStation {
                 int currentValue = refillingFuel.getValue();
                 System.out.printf("Low fuel in vault. Now %d, refilling...", currentValue);
                 int newValue = currentValue + Vault.refill(fuelStationType, refillingFuel.type,6000);
-                refillingFuel.setValue(refillingFuel.getValue() + newValue);
+                refillingFuel.setValue(newValue);
 
                 vault.put(refillingFuel.type, refillingFuel);
                 System.out.printf(" now %d\n", newValue);
