@@ -8,6 +8,7 @@ import org.example.service.FuelType;
 import org.example.vault.Vault;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Main {
     static ArrayList<LightCarAZSGenerator> lightCarAZSClients = new ArrayList<>();
@@ -18,9 +19,9 @@ public class Main {
     static ArrayList<HeavyCarAAZSGenerator> heavyCarAAZSClients = new ArrayList<>();
     static ArrayList<AAZS> fuelAAZSStations = new ArrayList<>();
 
+
     public static void main(String[] args) {
         init();
-        Vault.initVaults(42000, 24000);
 
         //model loop
         for (int i = 0; i < 14400; i++) {
@@ -28,7 +29,7 @@ public class Main {
             makeAAZSTick();
         }
 
-        makeCounts();
+        makeResults();
     }
 
     private static void init() {
@@ -42,6 +43,7 @@ public class Main {
             heavyCarAAZSClients.add(new HeavyCarAAZSGenerator(13, 270, 30));
             fuelAAZSStations.add(new AAZS());
         }
+        Vault.initVaults(42000, 24000);
     }
 
     public static void makeAZSTick() {
@@ -102,7 +104,7 @@ public class Main {
         }
     }
 
-    public static void makeCounts() {
+    public static void makeResults() {
         System.out.println("----------RESULTS----------");
 
         //----------FUEL REMAINING----------
