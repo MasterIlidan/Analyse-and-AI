@@ -5,7 +5,9 @@ import org.example.request.Client;
 import java.util.HashMap;
 
 public class AAZS extends FuelStation {
+    private static int counter = 1;
     public AAZS() {
+        name = "AZS " + counter++;
         fuelStationType = FuelStationType.AAZS;
         vault = initVault();
         prices = initPrices();

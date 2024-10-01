@@ -19,7 +19,7 @@ public class Fuel {
      */
     public boolean refillClientCar(int countOfFuel) {
         System.out.println("Remaining Fuel + " + type.fuelType + ": " + value);
-        if ((value - countOfFuel) > 0) {
+        if ((value - countOfFuel) >= 0) {
             value = value - countOfFuel;
             return true;
         } else {

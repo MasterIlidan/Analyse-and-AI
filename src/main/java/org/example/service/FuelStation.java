@@ -6,6 +6,7 @@ import org.example.vault.Vault;
 import java.util.HashMap;
 
 public class FuelStation {
+    String name;
     FuelStationType fuelStationType;
     HashMap<FuelType, Fuel> vault;
     private final int critical = 2000;
@@ -17,11 +18,12 @@ public class FuelStation {
 
     public boolean service(Client client) {
         clients++;
+        System.out.println(name);
         System.out.println(client.getClientType().getType() + " client want " + client.getFuelType().fuelType + ", count: " + client.getCountOfFuel());
         boolean success = vault.get(client.getFuelType()).refillClientCar(client.getCountOfFuel());
         if (success) {
             servicedClients++;
-            income += prices.get(client.getFuelType());
+            income += (prices.get(client.getFuelType()) * client.getCountOfFuel());
             if (vault.get(client.getFuelType()).getValue() < critical) {
                 Fuel refillingFuel = vault.get(client.getFuelType());
                 int currentValue = refillingFuel.getValue();
@@ -38,5 +40,17 @@ public class FuelStation {
     }
     public double getIncome() {
         return income;
+    }
+    public int getCurrentFuel (FuelType fuelType) {
+        return vault.get(fuelType).getValue();
+    }
+    public String getName(){
+        return name;
+    }
+    public int getClients(){
+        return clients;
+    }
+    public int getServicedClients(){
+        return servicedClients;
     }
 }

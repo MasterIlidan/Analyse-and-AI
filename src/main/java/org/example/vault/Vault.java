@@ -1,6 +1,5 @@
 package org.example.vault;
 
-import org.example.service.FuelStation;
 import org.example.service.FuelStationType;
 import org.example.service.FuelType;
 
@@ -57,5 +56,8 @@ public abstract class Vault {
             return returnValue;
         }
         throw new RuntimeException("Fuel station type " + fuelStationType + " is out of bounds");
+    }
+    public static int getCurrentFuel(FuelStationType fuelStationType, FuelType fuelType) {
+        return vaults.get(fuelStationType).get(fuelType);
     }
 }
